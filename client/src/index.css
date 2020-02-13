@@ -1,0 +1,133 @@
+@import "~materialize-css/dist/css/materialize.min.css";
+
+.mr{
+    margin-right: 1em;
+}
+
+.ml {
+    margin-left: 1em;
+}
+
+.mt {
+    margin-top: 1em;
+}
+
+.mb {
+    margin-bottom: 1em;
+}
+
+.block{
+    display: block;
+}
+
+.card-description {
+    width: content-box;
+}
+
+.btn {
+    z-index: auto;
+}
+.icon_blc{
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    color: #6f6f6f;
+}
+.icon_blc i:hover{
+    color: #00bcd4;
+}
+.cardBox{
+    display: flex;
+    /*flex-wrap: wrap;*/
+    flex-direction: row;
+    margin-top: 20px;
+    border: 1px solid darkgrey;
+    padding: 2em;
+}
+.cardBox .slider .carousel-row>div{
+    display: flex!important;
+    justify-content: center;
+}
+.cardBox .slider{
+    height: auto;
+}
+
+.divider {
+    margin: 20px 0;
+}
+
+.menu_wrapper a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#preview {
+
+}
+
+.uploadImg {
+    height: 250px;
+    width: auto;
+}
+#drop-area {
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+}
+#drop-area.highlight {
+    border-color: purple;
+}
+p {
+    margin-top: 0;
+}
+.my-form {
+    margin-bottom: 10px;
+}
+#gallery {
+    margin-top: 10px;
+}
+#gallery img {
+    width: 150px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+.button {
+    display: inline-block;
+    padding: 10px;
+    background: #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+.button:hover {
+    background: #ddd;
+}
+#fileElem {
+    display: none;
+}
+
+.admin_form {
+    width: 80%;
+    padding: 2em;
+    border: 1px solid darkcyan;
+    border-radius: 10px;
+}
+
+
+@media (max-width: 992px) {
+    .cardBox {
+        flex-direction: column;
+        padding: 1em;
+    }
+    .cardBox .slider .carousel-item {
+        width: 100%!important;
+    }
+    .cardBox .slider .carousel-initialized{
+        padding: 0!important;
+    }
+}
