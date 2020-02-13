@@ -7,7 +7,7 @@ const AuthPage = () =>{
     const message = useMessage();
     const { loading,error,request,clearError} = useHttp();
     const[form, setForm]  = useState({
-        login: '', password: '', email: ''
+         password: '', email: ''
     });
 
     useEffect(() => {

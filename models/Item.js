@@ -1,13 +1,12 @@
 const {Schema, model} = require('mongoose');
 
 const schema = new Schema({
-    id: { type: Number, unique: true, required: true },
-    title: { type: String, required: true },
+    title: { type: String, required: true , unique: true,},
     description: { type: String, required: true },
     price: { type: Number, required: true },
-    tags: { type: Object },
-    imgs: {type: Object},
-    pathToFile: {type: String, required: true},
+    tags: { type: Array },
+    // imgs: {type: Object},
+    // pathToFile: {type: String},
     likes: {type: Number},
     downloads: {type: Number}
 });
