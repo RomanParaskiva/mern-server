@@ -62,6 +62,9 @@ const AuthPage = () =>{
                             </div>
                         </div>
                     </div>
+
+
+
                     <div className="card-action">
                         <button
                             className="btn blue-grey darken-2 white-text mr"

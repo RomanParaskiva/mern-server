@@ -57,7 +57,8 @@ const AdminNewItem = () =>{
 
         function handleFiles(files) {
             files = [...files];
-            message(files)
+            message(JSON.stringify(files))
+            console.log(files)
             initializeProgress(files.length);
             files.forEach(uploadFile);
             files.forEach(previewFile)
@@ -70,13 +71,15 @@ const AdminNewItem = () =>{
         }
 
         const uploadFile = async file => {
-            message(file)
-            let url = './images';
+
+            let url = `/api/upload/image`;
             let formData = new FormData();
             formData.append('file', file);
+            formData.delete('Content-Type')
+
             try {
                 const data = await request(url, 'POST', formData)
-                message(data.message)
+                message(data.message, ' dsfdsgsdgdgs')
             } catch (e) { message(e.message)}
 
 
@@ -88,9 +91,6 @@ const AdminNewItem = () =>{
             e.stopPropagation()
         }
     })
-
-
-
 
     function previewFile(file) {
         let reader = new FileReader();
@@ -106,16 +106,30 @@ const AdminNewItem = () =>{
         setForm({...form,[event.target.name]: event.target.value});
     }
 
+
+
     const handleChips = event => {
         message(event.keyCode);
         if(event.keyCode === 13) {
             form.tags.push(word);
-            message(tags)
+            message(form.tags)
             word = '';
         } else {
             word += event.key;
         }
+        const closeIcons = document.querySelectorAll('.close');
+        if(closeIcons) {
+            closeIcons.forEach(icon => icon.addEventListener('click', () => {
+                for(let i = 0; i <= form.tags.length; i++){
+                    if( form.tags[i] == icon.previousSibling.data){
+                        form.tags.splice(i,1)
+                    }
+                }
+
+            },false))
+        }
     }
+
 
     const handleSubmit = async event => {
 
@@ -163,6 +177,7 @@ const AdminNewItem = () =>{
                         <label htmlFor="price">Цена</label>
                         <input onChange={handleChange} type="number" name="price" required id="price" className="validate"/>
                     </div>
+
                     <div className="input-field col m8 s12">
                         <div id="drop-area">
                             <p>Перетащите изображения для загрузки на сервер</p>

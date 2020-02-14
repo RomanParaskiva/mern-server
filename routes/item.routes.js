@@ -32,7 +32,21 @@ router.post(
         } catch (e) {
             res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
         }
-    })
+    });
+// /api/upload/image
+router.post('/image', (req, res) => {
+    console.log(req);
+    let imageFile = req.files.file;
+
+    imageFile.mv(`${__dirname}/public/${req.body.filename}.jpg`, function(e) {
+        if (e) {
+            return res.status(500).json({ error: e.message, message: 'Ошибка загрузки файла'});
+        }
+
+        res.json({file: `images/${req.body.filename}.jpg`});
+    });
+
+})
 
 // api/auth/login
 // router.post(

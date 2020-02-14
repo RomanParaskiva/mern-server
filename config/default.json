@@ -1,5 +1,6 @@
 {
     "port": 5000,
     "mongoUri": "mongodb+srv://dbUser:gfhfcbdbkz@cluster0-kxrko.azure.mongodb.net/app?retryWrites=true&w=majority",
-    "jwt_secret": "vilya petra 1290"
+    "jwt_secret": "vilya petra 1290",
+    "cloud_url": "cloudinary://378417685138564:kTg8T7ird0tzoyT-nnecoHgIbts@paras"
 }
