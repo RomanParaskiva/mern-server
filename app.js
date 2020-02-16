@@ -6,13 +6,10 @@ const app = express();
 
 app.use(express.json({ extended: true} ));
 
-app.use(express.application({ extended: true}));
-
 app.use('/api/auth', require('./routes/auth.routes.js'));
 
 app.use('/api/item', require('./routes/item.routes.js'));
 
-app.use('/api/upload', require('./routes/item.routes.js'));
 
 const PORT = config.get('port') || 5000;
 

@@ -16,7 +16,7 @@ export const useRoutes = (isAdmin,isAuthenticated) => {
                 <Route path="/adminka" exact>
                     <AdminPage />
                 </Route>
-                <Route path="/adminka/new" exact>
+                <Route path="/adminka/new">
                     <AdminNewItem />
                 </Route>
                 <Route path="/adminka/detail/:id">

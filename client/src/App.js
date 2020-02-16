@@ -1,8 +1,14 @@
 import React from 'react';
 import { useRoutes } from './routes';
 import {BrowserRouter as Router } from 'react-router-dom';
+import {AuthContext} from "./context/AuthContext";
+import {useAuth} from "./hooks/auth.hook";
+import {Navbar} from "./components/Navbar";
 import 'materialize-css';
 import * as M from "materialize-css";
+
+
+
 
 document.addEventListener('DOMContentLoaded', function() {
     const instanse = M.AutoInit();
@@ -16,15 +22,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 function App() {
-  const routes = useRoutes(true,true);
+    const { login, logout, userId, token, isAdmin} = useAuth()
+    const  isAuthenticated = !!token
+  const routes = useRoutes(isAdmin, isAuthenticated);
   return (
-      <div className="container">
+      <AuthContext.Provider value={{
+          login, logout, token, userId, isAuthenticated, isAdmin
+      }}>
           <Router>
-              <div className="App">
-                  {routes}
-              </div>
+              { isAuthenticated && isAdmin && <Navbar/>}
+                  <div className="container">
+                      <div className="App">
+                          {routes}
+                      </div>
+                  </div>
           </Router>
-      </div>
+      </AuthContext.Provider>
 
   );
 }

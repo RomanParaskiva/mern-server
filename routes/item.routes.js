@@ -34,7 +34,7 @@ router.post(
         }
     });
 // /api/upload/image
-router.post('/image', (req, res) => {
+router.post('/upload', (req, res) => {
     console.log(req);
     let imageFile = req.files.file;
 

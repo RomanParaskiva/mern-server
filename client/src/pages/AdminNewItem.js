@@ -1,7 +1,7 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
-import * as M from "materialize-css";
+
 
 const AdminNewItem = () =>{
     const message = useMessage();
@@ -13,8 +13,7 @@ const AdminNewItem = () =>{
         imgs: {},
         pathToFile: {}
     });
-    const { loading, error, request, clearError} = useHttp();
-    let tags = [];
+    const { loading, request} = useHttp();
     let word = '';
 
     document.addEventListener('DOMContentLoaded',() => {
@@ -57,8 +56,6 @@ const AdminNewItem = () =>{
 
         function handleFiles(files) {
             files = [...files];
-            message(JSON.stringify(files))
-            console.log(files)
             initializeProgress(files.length);
             files.forEach(uploadFile);
             files.forEach(previewFile)
@@ -72,14 +69,15 @@ const AdminNewItem = () =>{
 
         const uploadFile = async file => {
 
-            let url = `/api/upload/image`;
+            let url = `/api/item/upload`;
             let formData = new FormData();
             formData.append('file', file);
             formData.delete('Content-Type')
 
             try {
                 const data = await request(url, 'POST', formData)
-                message(data.message, ' dsfdsgsdgdgs')
+                progressDone()
+                message(data)
             } catch (e) { message(e.message)}
 
 
@@ -133,7 +131,7 @@ const AdminNewItem = () =>{
 
     const handleSubmit = async event => {
 
-        // event.preventDefault();
+        event.preventDefault();
         try {
             const data = await request('/api/item/add', 'POST', {...form});
             message(data.message);
