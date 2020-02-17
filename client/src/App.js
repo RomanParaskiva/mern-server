@@ -3,34 +3,37 @@ import { useRoutes } from './routes';
 import {BrowserRouter as Router } from 'react-router-dom';
 import {AuthContext} from "./context/AuthContext";
 import {useAuth} from "./hooks/auth.hook";
-import {Navbar} from "./components/Navbar";
+import {AdminNavbar} from "./components/AdminNavbar";
 import 'materialize-css';
 import * as M from "materialize-css";
+import {UserNavbar} from "./components/UserNavbar";
 
 
 
 
-document.addEventListener('DOMContentLoaded', function() {
+setTimeout(() => {
     const instanse = M.AutoInit();
     const elems = document.querySelectorAll('.materialboxed');
     const ModalImg = M.Materialbox.init(elems);
     const navbar = document.querySelector('.sidenav');
     const Sidenav = M.Sidenav.init(navbar);
-    const chips = document.querySelectorAll('.chips');
-    const Chips = M.Chips.init(chips);
-});
+
+
+
+}, 10);
 
 
 function App() {
-    const { login, logout, userId, token, isAdmin} = useAuth()
-    const  isAuthenticated = !!token
+    const { login, logout, userId, token, isAdmin} = useAuth();
+    const  isAuthenticated = !!token;
+    const navbar = isAdmin ? <AdminNavbar/> : <UserNavbar/>;
   const routes = useRoutes(isAdmin, isAuthenticated);
   return (
       <AuthContext.Provider value={{
-          login, logout, token, userId, isAuthenticated, isAdmin
+        login, logout, token, userId, isAuthenticated, isAdmin
       }}>
           <Router>
-              { isAuthenticated && isAdmin && <Navbar/>}
+              {navbar}
                   <div className="container">
                       <div className="App">
                           {routes}
@@ -38,8 +41,8 @@ function App() {
                   </div>
           </Router>
       </AuthContext.Provider>
-
   );
 }
 
 export default App;
+

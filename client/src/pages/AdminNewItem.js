@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
+import * as M from 'materialize-css'
 
 
-const AdminNewItem = () =>{
+const AdminNewItem = () => {
+    const {loading, request} = useHttp();
     const message = useMessage();
-    const[form, setForm]  = useState({
+    const [form, setForm] = useState({
         title: '',
         description: '',
         price: 0,
@@ -13,11 +15,15 @@ const AdminNewItem = () =>{
         imgs: {},
         pathToFile: {}
     });
-    const { loading, request} = useHttp();
+
     let word = '';
 
-    document.addEventListener('DOMContentLoaded',() => {
-        const dropArea = document.getElementById('drop-area');
+
+    setTimeout(() => {
+        const chips = document.querySelectorAll('.chips');
+        const Chips = M.Chips.init(chips);
+
+        const dropArea = document.getElementById('dropArea');
 
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropArea.addEventListener(eventName, preventDefaults, false)
@@ -39,58 +45,33 @@ const AdminNewItem = () =>{
         function unhighlight(e) {
             dropArea.classList.remove('highlight')
         }
-        let progressBar = document.getElementById('progress-bar')
 
-        let filesDone = 0
-        let filesToDo = 0
-        function initializeProgress(numfiles) {
-            progressBar.value = 0
-            filesDone = 0
-            filesToDo = numfiles
-        }
-
-        function progressDone() {
-            filesDone++;
-            progressBar.value = filesDone / filesToDo * 100
-        }
-
-        function handleFiles(files) {
-            files = [...files];
-            initializeProgress(files.length);
-            files.forEach(uploadFile);
-            files.forEach(previewFile)
-        }
-
-        function handleDrop(e) {
-            let dt = e.dataTransfer
-            let files = dt.files
-            handleFiles(files)
-        }
-
-        const uploadFile = async file => {
-
-            let url = `/api/item/upload`;
-            let formData = new FormData();
-            formData.append('file', file);
-            formData.delete('Content-Type')
-
-            try {
-                const data = await request(url, 'POST', formData)
-                progressDone()
-                message(data)
-            } catch (e) { message(e.message)}
+    }, 10);
 
 
 
-        }
 
-        function preventDefaults(e) {
-            e.preventDefault()
-            e.stopPropagation()
-        }
-    })
 
-    function previewFile(file) {
+    function handleDrop(e) {
+        let dt = e.dataTransfer
+        console.log(dt)
+        let files = dt.files
+        handleFiles(files)
+    }
+
+    function handleFiles(files) {
+        files = [...files];
+        files.forEach(uploadFile);
+        files.forEach(previewFile)
+    }
+
+
+    function preventDefaults(e) {
+        e.preventDefault()
+        e.stopPropagation()
+    }
+
+    const previewFile = (file) => {
         let reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = function () {
@@ -100,31 +81,48 @@ const AdminNewItem = () =>{
         }
     }
 
-    const handleChange = event => {
-        setForm({...form,[event.target.name]: event.target.value});
+    const uploadFile = async file => {
+        message(file)
+        console.log(file)
+        let url = `/api/item/upload`;
+        let formData = new FormData();
+        formData.append('file', file);
+
+        const headers = {'Content-Type' : 'multipart/form-data'}
+
+        try {
+            const data = await request(url, 'POST', formData, headers)
+        } catch (e) {
+            message(e.message)
+        }
+
     }
 
-
+    const handleChange = event => {
+        setForm({...form, [event.target.name]: event.target.value});
+    }
 
     const handleChips = event => {
         message(event.keyCode);
-        if(event.keyCode === 13) {
-            form.tags.push(word);
-            message(form.tags)
-            word = '';
+        if (event.keyCode === 13) {
+            if (word.length > 0) {
+                form.tags.push(word);
+                message(form.tags)
+                word = '';
+            }
         } else {
             word += event.key;
         }
         const closeIcons = document.querySelectorAll('.close');
-        if(closeIcons) {
+        if (closeIcons) {
             closeIcons.forEach(icon => icon.addEventListener('click', () => {
-                for(let i = 0; i <= form.tags.length; i++){
-                    if( form.tags[i] == icon.previousSibling.data){
-                        form.tags.splice(i,1)
+                for (let i = 0; i <= form.tags.length; i++) {
+                    if (form.tags[i] === icon.previousSibling.data) {
+                        form.tags.splice(i, 1)
                     }
                 }
 
-            },false))
+            }, false))
         }
     }
 
@@ -144,49 +142,48 @@ const AdminNewItem = () =>{
                 pathToFile: {}
             })
             alert(JSON.stringify({...form}));
-        } catch (e) { }
+        } catch (e) {
+        }
 
     }
 
-    return(
+    return (
         <div>
-            <div className="menu_wrapper">
-                <a href="#" data-target="slide-out" className="sidenav-trigger">Меню</a>
-
-            </div>
-            <div className="container">
+            <div className="container mt">
                 <div className="admin_form">
                     <div className="input-field col m8 s12">
-                        <input onChange={handleChange} id="title" name="title" type="text" required className="validate"/>
+                        <input onChange={handleChange} id="title" name="title" type="text" required
+                               className="validate"/>
                         <label htmlFor="title">Имя файла</label>
                     </div>
                     <div className="input-field col m8 s12">
                         <label htmlFor="description">Описание</label>
-                        <input onChange={handleChange} type="text" name="description" required id="description" className="validate"/>
+                        <input onChange={handleChange} type="text" name="description" required id="description"
+                               className="validate"/>
                     </div>
                     <div className="input-field col m8 s12">
                         <label htmlFor="tags">Тэги</label>
-                        <div className="chips"  >
+                        <div className="chips">
 
-                        <input name="tags" id="tags" className="custom-class" required onKeyDown={handleChips}/>
+                            <input name="tags" id="tags" className="custom-class" required onKeyDown={handleChips}/>
                         </div>
                     </div>
                     <div className="input-field col m8 s12">
                         <label htmlFor="price">Цена</label>
-                        <input onChange={handleChange} type="number" name="price" required id="price" className="validate"/>
+                        <input onChange={handleChange} type="number" name="price" required id="price"
+                               className="validate"/>
                     </div>
 
                     <div className="input-field col m8 s12">
-                        <div id="drop-area">
+                        <div id="dropArea">
                             <p>Перетащите изображения для загрузки на сервер</p>
-                            <progress id="progress-bar" max="100" value="0"></progress>
 
                             <input id="fileElem" type="file" name="photo" multiple accept="image/*"/>
                             <div id="gallery"></div>
                         </div>
                     </div>
                     <div className="input-field col m8 s12">
-                        <input type="file" name="zip" id="zip" required accept="application/zip" />
+                        <input type="file" name="zip" id="zip" required accept="application/zip"/>
                     </div>
                     <button
                         className="btn blue-grey darken-2 white-text mr"

@@ -71,14 +71,14 @@
     height: 250px;
     width: auto;
 }
-#drop-area {
+#dropArea {
     border: 2px dashed #ccc;
     border-radius: 20px;
     width: 100%;
     margin: 20px auto;
     padding: 20px;
 }
-#drop-area.highlight {
+#dropArea.highlight {
     border-color: purple;
 }
 p {
