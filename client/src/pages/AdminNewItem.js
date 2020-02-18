@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
 import * as M from 'materialize-css'
+import axios from 'axios'
 
 
 const AdminNewItem = () => {
@@ -12,7 +13,7 @@ const AdminNewItem = () => {
         description: '',
         price: 0,
         tags: [],
-        imgs: {},
+        imgs: [],
         pathToFile: {}
     });
 
@@ -54,7 +55,6 @@ const AdminNewItem = () => {
 
     function handleDrop(e) {
         let dt = e.dataTransfer
-        console.log(dt)
         let files = dt.files
         handleFiles(files)
     }
@@ -81,20 +81,22 @@ const AdminNewItem = () => {
         }
     }
 
-    const uploadFile = async file => {
-        message(file)
+    const uploadFile = file => {
+        let url = `/upload`;
         console.log(file)
-        let url = `/api/item/upload`;
-        let formData = new FormData();
-        formData.append('file', file);
+        let fd = new FormData();
+        fd.append('file', file)
+        fd.append('filename', file.name)
+       axios.post(url, fd)
+           .then(res => {
+              form.imgs.push(res.data.file);
+           })
+    }
 
-        const headers = {'Content-Type' : 'multipart/form-data'}
+    const uploadZip = e => {
+        let dt = e.dataTransfer
 
-        try {
-            const data = await request(url, 'POST', formData, headers)
-        } catch (e) {
-            message(e.message)
-        }
+        console.log(dt)
 
     }
 
@@ -133,14 +135,6 @@ const AdminNewItem = () => {
         try {
             const data = await request('/api/item/add', 'POST', {...form});
             message(data.message);
-            setForm({
-                title: '',
-                description: '',
-                price: 0,
-                tags: [],
-                imgs: {},
-                pathToFile: {}
-            })
             alert(JSON.stringify({...form}));
         } catch (e) {
         }
@@ -183,7 +177,7 @@ const AdminNewItem = () => {
                         </div>
                     </div>
                     <div className="input-field col m8 s12">
-                        <input type="file" name="zip" id="zip" required accept="application/zip"/>
+                        <input type="file" name="zip" id="zip" onChange={uploadZip}  accept="application/zip"/>
                     </div>
                     <button
                         className="btn blue-grey darken-2 white-text mr"

@@ -1,14 +1,22 @@
 const express = require('express');
 const config  = require('config');
+const path = require('path');
 const mongoose = require('mongoose');
+const fileUpload = require('express-fileupload');
+const cors = require('cors');
 
 const app = express();
+
 
 app.use(express.json({ extended: true} ));
 
 app.use('/api/auth', require('./routes/auth.routes.js'));
 
 app.use('/api/item', require('./routes/item.routes.js'));
+
+app.use(cors());
+app.use(fileUpload());
+app.use('./client/public', express.static(__dirname + './client/public'));
 
 
 const PORT = config.get('port') || 5000;
@@ -28,4 +36,18 @@ async function start() {
 }
 
 start();
+
+app.post('/upload', (req, res, next) => {
+    console.log(req);
+    let imageFile = req.files.file;
+
+    imageFile.mv(`./client/public/images/${req.body.filename}`, function(err) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        res.json({file: `./client/public/images/${req.body.filename}`});
+    });
+
+})
 

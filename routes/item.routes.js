@@ -1,10 +1,7 @@
 const {Router} = require ('express')
 const Item = require('../models/Item')
 const router = Router();
-const fileUpload = require('express-fileupload');
 
-
-router.use(fileUpload());
 // api/item/add
 router.post(
     '/add',
@@ -36,20 +33,26 @@ router.post(
             res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
         }
     });
-// /api/upload/image
-router.post('/upload', (req, res) => {
-    console.log(req)
-    let imageFile = req.files.photo;
+// /api/item/upload
+router.post(
+    '/upload',
+    async (req, res) => {
+        try {
+            let imageFile = req.files.file;
 
-    imageFile.mv(`${__dirname}/public/${req.body.filename}.jpg`, function(e) {
-        if (e) {
-            return res.status(500).json({ error: e.message, message: 'Ошибка загрузки файла'});
+            imageFile.mv(`./images/${req.body.filename}`, function(e) {
+                if (e) {
+                    return res.status(500).json({error: e.message, message: 'Ошибка загрузки файла'});
+                }
+
+                res.json({file: `./images/${req.body.filename}`});
+            })
+        }
+        catch (e) {
+                res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
         }
 
-        res.json({file: `${__dirname}/public/${req.body.filename}.jpg`});
-    });
-
-})
+    })
 
 // api/auth/login
 // router.post(
