@@ -38,7 +38,7 @@ async function start() {
 start();
 
 app.post('/upload', (req, res, next) => {
-    console.log(req);
+
     let imageFile = req.files.file;
 
     imageFile.mv(`./client/public/images/${req.body.filename}`, function(err) {
@@ -47,6 +47,20 @@ app.post('/upload', (req, res, next) => {
         }
 
         res.json({file: `./client/public/images/${req.body.filename}`});
+    });
+
+})
+
+app.post('/uploadArchive', (req, res, next) => {
+
+    let archiveFile = req.files.file;
+
+    archiveFile.mv(`./client/public/archive/${req.body.filename}`, function(err) {
+        if (err) {
+            return res.status(500).send(err);
+        }
+
+        res.json({file: `./client/public/archive/${req.body.filename}`});
     });
 
 })

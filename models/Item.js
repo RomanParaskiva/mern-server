@@ -5,10 +5,9 @@ const schema = new Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     tags: { type: Array },
-    // imgs: {type: Object},
-    // pathToFile: {type: String},
-    likes: {type: Number},
-    downloads: {type: Number}
+    imgs: {type: Array},
+    pathToFile: {type: String},
+    likes: {type: Number}
 });
 
 module.exports = model('Item', schema);

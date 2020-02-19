@@ -3,6 +3,9 @@ import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
 import * as M from 'materialize-css'
 import axios from 'axios'
+import Card from "../components/Card";
+import Image from "../components/Image";
+import IconBlc from "../components/IconBlc";
 
 
 const AdminNewItem = () => {
@@ -13,9 +16,13 @@ const AdminNewItem = () => {
         description: '',
         price: 0,
         tags: [],
+        likes: 0,
         imgs: [],
-        pathToFile: {}
+        pathToFile: ''
     });
+    const [archive, setArchive] = useState({
+        selectedArchive: null
+    })
 
     let word = '';
 
@@ -54,6 +61,7 @@ const AdminNewItem = () => {
 
 
     function handleDrop(e) {
+        e.preventDefault()
         let dt = e.dataTransfer
         let files = dt.files
         handleFiles(files)
@@ -83,7 +91,6 @@ const AdminNewItem = () => {
 
     const uploadFile = file => {
         let url = `/upload`;
-        console.log(file)
         let fd = new FormData();
         fd.append('file', file)
         fd.append('filename', file.name)
@@ -93,11 +100,16 @@ const AdminNewItem = () => {
            })
     }
 
-    const uploadZip = e => {
-        let dt = e.dataTransfer
-
-        console.log(dt)
-
+    const fileSelectedHandler = event => {
+        preventDefaults(event)
+        archive.selectedArchive = event.target.files[0]
+        let fd = new FormData();
+        fd.append('file', archive.selectedArchive)
+        fd.append('filename', archive.selectedArchive.name)
+        axios.post('/uploadArchive', fd)
+            .then(res => {
+                form.pathToFile = (res.data.file);
+            })
     }
 
     const handleChange = event => {
@@ -128,66 +140,96 @@ const AdminNewItem = () => {
         }
     }
 
-
+    const imageSrc = form.imgs.length < 1 ? `./images/nope.jpg` : form.imgs[0]
     const handleSubmit = async event => {
 
-        event.preventDefault();
         try {
             const data = await request('/api/item/add', 'POST', {...form});
+
             message(data.message);
-            alert(JSON.stringify({...form}));
         } catch (e) {
         }
 
     }
 
     return (
-        <div>
-            <div className="container mt">
-                <div className="admin_form">
-                    <div className="input-field col m8 s12">
-                        <input onChange={handleChange} id="title" name="title" type="text" required
-                               className="validate"/>
-                        <label htmlFor="title">Имя файла</label>
-                    </div>
-                    <div className="input-field col m8 s12">
-                        <label htmlFor="description">Описание</label>
-                        <input onChange={handleChange} type="text" name="description" required id="description"
-                               className="validate"/>
-                    </div>
-                    <div className="input-field col m8 s12">
-                        <label htmlFor="tags">Тэги</label>
-                        <div className="chips">
-
-                            <input name="tags" id="tags" className="custom-class" required onKeyDown={handleChips}/>
+            <div className="row mt">
+                <div className="col 8">
+                    <div className="admin_form">
+                        <div className="input-field col m8 s12">
+                            <input onChange={handleChange} id="title" name="title" type="text" required
+                                   className="validate"/>
+                            <label htmlFor="title">Имя файла</label>
                         </div>
-                    </div>
-                    <div className="input-field col m8 s12">
-                        <label htmlFor="price">Цена</label>
-                        <input onChange={handleChange} type="number" name="price" required id="price"
-                               className="validate"/>
-                    </div>
-
-                    <div className="input-field col m8 s12">
-                        <div id="dropArea">
-                            <p>Перетащите изображения для загрузки на сервер</p>
-
-                            <input id="fileElem" type="file" name="photo" multiple accept="image/*"/>
-                            <div id="gallery"></div>
+                        <div className="input-field col m8 s12">
+                            <label htmlFor="description">Описание</label>
+                            <input onChange={handleChange} type="text" name="description" required id="description"
+                                   className="validate"/>
                         </div>
+                        <div className="input-field col m8 s12">
+                            <label htmlFor="tags">Тэги</label>
+                            <div className="chips">
+
+                                <input name="tags" id="tags" className="custom-class" required onKeyDown={handleChips}/>
+                            </div>
+                        </div>
+                        <div className="input-field col m8 s12">
+                            <label htmlFor="price">Цена</label>
+                            <input onChange={handleChange} type="number" name="price" required id="price"
+                                   className="validate"/>
+                        </div>
+                        <div className="input-field col m8 s12">
+                            <label htmlFor="likes">Лайки</label>
+                            <input onChange={handleChange} type="number" name="likes" required id="likes"
+                                   className="validate"/>
+                        </div>
+
+                        <div className="input-field col m8 s12">
+                            <div id="dropArea">
+                                <p>Перетащите изображения для загрузки на сервер</p>
+
+                                <input id="fileElem" type="file" name="photo" multiple accept="image/*"/>
+                                <div id="gallery"></div>
+                            </div>
+                        </div>
+                        <div className="input-field col m8 s12">
+                            <input type="file" onChange={fileSelectedHandler}  />
+                        </div>
+                        <button
+                            className="btn blue-grey darken-2 white-text mr"
+                            onClick={handleSubmit}
+                            disabled={loading}
+                        >Загрузить
+                        </button>
                     </div>
-                    <div className="input-field col m8 s12">
-                        <input type="file" name="zip" id="zip" onChange={uploadZip}  accept="application/zip"/>
-                    </div>
-                    <button
-                        className="btn blue-grey darken-2 white-text mr"
-                        onClick={handleSubmit}
-                        disabled={loading}
-                    >Загрузить
-                    </button>
+                </div>
+                <div className="col 4">
+                        <div className="card hoverable">
+                            <div className="card-image waves-effect waves-block waves-light">
+                                <Image src={imageSrc}/>
+                            </div>
+                            <div className="card-content">
+                        <span className="card-title activator grey-text text-darken-4">
+                            {form.title}
+                            <i className="material-icons right">more_vert</i>
+                            <IconBlc likes={form.likes}/>
+                        </span>
+                                <div className="card_btn_wrapper">
+                                    <a className="waves-effect waves-light cyan darken-1 btn mr-1 mt-1">КУПИТЬ</a>
+
+                                    <a href="#"
+                                       className="waves-effect waves-light cyan darken-1 btn mr-1 mt-1">Подробнее</a>
+
+                                </div>
+                            </div>
+                            <div className="card-reveal">
+                        <span className="card-title grey-text text-darken-4">{form.title}<i
+                            className="material-icons right">close</i></span>
+                                <p className="card-description">{form.description}</p>
+                            </div>
+                        </div>
                 </div>
             </div>
-        </div>
     )
 }
 

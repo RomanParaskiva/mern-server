@@ -24,6 +24,11 @@
     width: content-box;
 }
 
+nav .nav-wrapper {
+    padding: 0 2em;
+}
+
+
 .btn {
     z-index: auto;
 }
@@ -66,6 +71,8 @@
 #preview {
 
 }
+
+
 
 .uploadImg {
     height: 250px;
@@ -112,7 +119,7 @@ p {
 }
 
 .admin_form {
-    width: 80%;
+    width: 100%;
     padding: 2em;
     border: 1px solid darkcyan;
     border-radius: 10px;
