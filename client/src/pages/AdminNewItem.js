@@ -3,9 +3,6 @@ import {useHttp} from "../hooks/http.hook";
 import {useMessage} from "../hooks/message.hook";
 import * as M from 'materialize-css'
 import axios from 'axios'
-import Card from "../components/Card";
-import Image from "../components/Image";
-import IconBlc from "../components/IconBlc";
 
 
 const AdminNewItem = () => {
@@ -69,6 +66,7 @@ const AdminNewItem = () => {
 
     function handleFiles(files) {
         files = [...files];
+        console.log(files);
         files.forEach(uploadFile);
         files.forEach(previewFile)
     }
@@ -90,7 +88,7 @@ const AdminNewItem = () => {
     }
 
     const uploadFile = file => {
-        let url = `/upload`;
+        let url = `/api/item/upload`;
         let fd = new FormData();
         fd.append('file', file)
         fd.append('filename', file.name)
@@ -106,7 +104,7 @@ const AdminNewItem = () => {
         let fd = new FormData();
         fd.append('file', archive.selectedArchive)
         fd.append('filename', archive.selectedArchive.name)
-        axios.post('/uploadArchive', fd)
+        axios.post('/api/item/uploadArchive', fd)
             .then(res => {
                 form.pathToFile = (res.data.file);
             })
@@ -140,13 +138,12 @@ const AdminNewItem = () => {
         }
     }
 
-    const imageSrc = form.imgs.length < 1 ? `./images/nope.jpg` : form.imgs[0]
     const handleSubmit = async event => {
-
         try {
             const data = await request('/api/item/add', 'POST', {...form});
 
             message(data.message);
+            if (data) window.location = "/";
         } catch (e) {
         }
 
@@ -154,72 +151,73 @@ const AdminNewItem = () => {
 
     return (
             <div className="row mt">
-                <div className="col 8">
-                    <div className="admin_form">
-                        <div className="input-field col m8 s12">
+                <div className="col s8 admin_form">
+                        <div className="input-field">
                             <input onChange={handleChange} id="title" name="title" type="text" required
                                    className="validate"/>
                             <label htmlFor="title">Имя файла</label>
                         </div>
-                        <div className="input-field col m8 s12">
+                        <div className="input-field">
                             <label htmlFor="description">Описание</label>
                             <input onChange={handleChange} type="text" name="description" required id="description"
                                    className="validate"/>
                         </div>
-                        <div className="input-field col m8 s12">
+                        <div className="input-field">
                             <label htmlFor="tags">Тэги</label>
                             <div className="chips">
 
                                 <input name="tags" id="tags" className="custom-class" required onKeyDown={handleChips}/>
                             </div>
                         </div>
-                        <div className="input-field col m8 s12">
+                        <div className="input-field">
                             <label htmlFor="price">Цена</label>
                             <input onChange={handleChange} type="number" name="price" required id="price"
                                    className="validate"/>
                         </div>
-                        <div className="input-field col m8 s12">
+                        <div className="input-field">
                             <label htmlFor="likes">Лайки</label>
                             <input onChange={handleChange} type="number" name="likes" required id="likes"
                                    className="validate"/>
                         </div>
 
-                        <div className="input-field col m8 s12">
+                        <div className="input-field">
                             <div id="dropArea">
                                 <p>Перетащите изображения для загрузки на сервер</p>
 
                                 <input id="fileElem" type="file" name="photo" multiple accept="image/*"/>
-                                <div id="gallery"></div>
+
                             </div>
                         </div>
-                        <div className="input-field col m8 s12">
+                        <div className="input-field ">
                             <input type="file" onChange={fileSelectedHandler}  />
                         </div>
                         <button
-                            className="btn blue-grey darken-2 white-text mr"
+                            className="btn blue-grey darken-2 white-text mr mb"
                             onClick={handleSubmit}
                             disabled={loading}
                         >Загрузить
                         </button>
-                    </div>
                 </div>
-                <div className="col 4">
+                <div className="col s4">
                         <div className="card hoverable">
-                            <div className="card-image waves-effect waves-block waves-light">
-                                <Image src={imageSrc}/>
+                            <div id="gallery" className="card-image waves-effect waves-block waves-light">
+
                             </div>
                             <div className="card-content">
-                        <span className="card-title activator grey-text text-darken-4">
-                            {form.title}
-                            <i className="material-icons right">more_vert</i>
-                            <IconBlc likes={form.likes}/>
-                        </span>
-                                <div className="card_btn_wrapper">
-                                    <a className="waves-effect waves-light cyan darken-1 btn mr-1 mt-1">КУПИТЬ</a>
+                                <span className="card-title activator grey-text text-darken-4">
+                                    {form.title}
+                                    <i className="material-icons right">more_vert</i>
+                                </span>
+                                <span className="activator grey-text text-darken-4">
+                                   $ {form.price}
+                                </span>
+
+                                <div className="card_btn_wrapper mt">
+                                    <a href="#" className="waves-effect waves-light cyan darken-1 btn mr ">BUY</a>
 
                                     <a href="#"
-                                       className="waves-effect waves-light cyan darken-1 btn mr-1 mt-1">Подробнее</a>
-
+                                       className="waves-effect waves-light white black-text btn mr ">More info</a>
+                                    <span className="likes_wrapper"><i className="material-icons">favorite_border</i><span>{form.likes}</span></span>
                                 </div>
                             </div>
                             <div className="card-reveal">

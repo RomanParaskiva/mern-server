@@ -7,7 +7,8 @@ const schema = new Schema({
     tags: { type: Array },
     imgs: {type: Array},
     pathToFile: {type: String},
-    likes: {type: Number}
+    likes: {type: Number},
+    date: {type: Date, default: Date.now}
 });
 
 module.exports = model('Item', schema);
