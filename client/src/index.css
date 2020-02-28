@@ -1,19 +1,23 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
 .mr{
-    margin-right: 1em;
+    margin-right: 1rem;
 }
 
 .ml {
-    margin-left: 1em;
+    margin-left: 1rem;
 }
 
 .mt {
-    margin-top: 1em;
+    margin-top: 1rem;
 }
 
 .mb {
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
+}
+
+.w-50{
+    width: 50%;
 }
 
 .block{
@@ -37,9 +41,17 @@ nav .nav-wrapper {
     align-items: center;
     font-size: 1rem;
     color: #6f6f6f;
+    margin-right: 2rem;
 }
 .icon_blc i:hover{
     color: #00bcd4;
+}
+.price {
+    margin-bottom: 0;
+    font-size: 34px;
+    font-weight: bold;
+    margin-right: 10px;
+
 }
 .cardBox{
     display: flex;
@@ -129,9 +141,44 @@ p {
     display: flex;
     align-items: center;
 }
+
+.card .card-image {
+    position: relative;
+    display: flex;
+    height: 300px;
+    justify-content: center;
+    align-items: center;
+}
+
 .likes_wrapper {
     display: flex;
     align-items: center;
+}
+
+.detail_title {
+    line-height: 120%;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 2rem;
+}
+.action_btn_wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 100%;
+}
+.desc_block{
+    display: flex;
+    flex-direction: row;
+}
+
+.wrapper{
+    display: flex;
 }
 
 @media (max-width: 992px) {
@@ -144,5 +191,14 @@ p {
     }
     .cardBox .slider .carousel-initialized{
         padding: 0!important;
+    }
+}
+
+@media (max-width: 768px) {
+    .card .card-image {
+        height: 250px;
+    }
+    .action_btn_wrapper{
+        flex-direction: column;
     }
 }

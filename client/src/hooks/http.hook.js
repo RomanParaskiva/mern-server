@@ -14,6 +14,7 @@ export const useHttp = () => {
             if (body){
                 body = JSON.stringify(body);
             }
+            setLoading(true)
             headers['Content-Type'] = 'application/json';
             const response = await fetch( url,{method, body, headers});
             const data = await response.json();

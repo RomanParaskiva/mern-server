@@ -6,9 +6,10 @@ export const CardsList = ({ cards }) => {
         return <p className="center">Товаров пока нет</p>
     }
 
+
     return (
         <div>
-            {cards.map(card => <Card key={card.index + 1} card={card}/>)}
+            {cards.map(card => <Card key={card._id} card={card}/>)}
         </div>
     )
 }

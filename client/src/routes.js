@@ -20,7 +20,7 @@ export const useRoutes = (isAdmin,isAuthenticated) => {
                         <AdminNewItem/>
                     </Route>
                     <Route path="/adminka/detail/:id">
-                        <AdminDetailPage/>
+                        <AdminDetailPage />
                     </Route>
                     <Redirect to="/adminka"/>
                 </Switch>
@@ -28,12 +28,12 @@ export const useRoutes = (isAdmin,isAuthenticated) => {
         } else {
             return (
                 <Switch>
-                    <Route path="/" exact>
-                        <MainPage/>
-                    </Route>
-                    <Route path="/detail/:id">
-                        <DetailPage/>
-                    </Route>
+                    {/*<Route path="/" exact>*/}
+                    {/*    <MainPage/>*/}
+                    {/*</Route>*/}
+                    {/*<Route path="/detail/:id">*/}
+                    {/*    <DetailPage/>*/}
+                    {/*</Route>*/}
                     <Route path="/user">
                         <UserPage/>
                     </Route>
@@ -52,7 +52,7 @@ export const useRoutes = (isAdmin,isAuthenticated) => {
                     <AuthPage/>
                 </Route>
                 <Route path="/detail/:id">
-                    <DetailPage/>
+                   <DetailPage />
                 </Route>
                 <Redirect to="/"/>
             </Switch>

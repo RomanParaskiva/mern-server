@@ -94,4 +94,28 @@ router.get(
     }
 })
 
+router.get(
+    '/',
+    async (req, res) => {
+        try {
+            const allCard = await Item.find()
+            return res.status(200).json(allCard)
+        } catch (e) {
+            res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
+        }
+    })
+
+// /api/item/
+router.get(
+    '/:id',
+    async (req, res) => {
+        try {
+            const card = await Item.findById(req.params.id)
+            return res.json(card)
+        } catch (e) {
+            res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
+        }
+    }
+)
+
 module.exports = router;

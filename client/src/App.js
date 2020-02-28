@@ -7,6 +7,7 @@ import {AdminNavbar} from "./components/AdminNavbar";
 import 'materialize-css';
 import * as M from "materialize-css";
 import {UserNavbar} from "./components/UserNavbar";
+import Loader from "./components/Loader";
 
 
 
@@ -24,17 +25,21 @@ setTimeout(() => {
 
 
 function App() {
-    const { login, logout, userId, token, isAdmin} = useAuth();
+    const { login, logout, userId, token, isAdmin, ready} = useAuth();
     const  isAuthenticated = !!token;
     const navbar = isAdmin ? <AdminNavbar/> : <UserNavbar/>;
   const routes = useRoutes(isAdmin, isAuthenticated);
+
+  if (!ready) {
+      return <Loader/>
+  }
   return (
       <AuthContext.Provider value={{
         login, logout, token, userId, isAuthenticated, isAdmin
       }}>
           <Router>
               {navbar}
-                  <div className="container">
+                  <div className="row">
                       <div className="App">
                           {routes}
                       </div>

@@ -14,6 +14,8 @@ app.use('/api/auth', require('./routes/auth.routes.js'));
 
 app.use('/api/item', require('./routes/item.routes.js'));
 
+// app.use('api/paypal', require('./routes/paypal.routes.js'));
+
 app.use(cors());
 app.use(fileUpload());
 app.use('./client/public', express.static(__dirname + './client/public'));
