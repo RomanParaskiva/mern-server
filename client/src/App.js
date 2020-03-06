@@ -13,11 +13,11 @@ import Loader from "./components/Loader";
 
 
 setTimeout(() => {
-    const instanse = M.AutoInit();
+    M.AutoInit();
     const elems = document.querySelectorAll('.materialboxed');
-    const ModalImg = M.Materialbox.init(elems);
+    M.Materialbox.init(elems);
     const navbar = document.querySelector('.sidenav');
-    const Sidenav = M.Sidenav.init(navbar);
+    M.Sidenav.init(navbar);
 
 
 
@@ -28,7 +28,7 @@ function App() {
     const { login, logout, userId, token, isAdmin, ready} = useAuth();
     const  isAuthenticated = !!token;
     const navbar = isAdmin ? <AdminNavbar/> : <UserNavbar/>;
-  const routes = useRoutes(isAdmin, isAuthenticated);
+    const routes = useRoutes(isAdmin, isAuthenticated);
 
   if (!ready) {
       return <Loader/>
@@ -39,7 +39,7 @@ function App() {
       }}>
           <Router>
               {navbar}
-                  <div className="row">
+                  <div className="">
                       <div className="App">
                           {routes}
                       </div>

@@ -7,12 +7,13 @@ const cors = require('cors');
 
 const app = express();
 
-
 app.use(express.json({ extended: true} ));
 
 app.use('/api/auth', require('./routes/auth.routes.js'));
 
 app.use('/api/item', require('./routes/item.routes.js'));
+
+app.use('/api/user', require('./routes/user.routes.js'));
 
 // app.use('api/paypal', require('./routes/paypal.routes.js'));
 

@@ -38,13 +38,12 @@ const AuthPage = () =>{
         } catch (e) { }
     }
     return  (
-        <div className="row">
-            <div className="col l6 m12 s12 offset-l3">
-                <div className="card purple lighten-2">
-                    <div className="card-content black-text">
-                        <h2 className="card-title">Sign up / Sign in</h2>
+            <div className="auth_container grey darken-3">
+                <div className="card blue darken-4">
+                    <div className="card-content white-text">
+                        <h2 className="card-title center-align">Sign up / Sign in</h2>
                         <div className="mt">
-                            <div className="input-field ">
+                            <div className="input-field">
                                 <input
                                     id="email"
                                     name="email"
@@ -53,7 +52,6 @@ const AuthPage = () =>{
                                     className="validate"
                                     onChange={changeHandler}
                                 />
-                                <label htmlFor="email" className="black-text">Email</label>
                             </div>
                             <div className="input-field">
                                 <input
@@ -64,7 +62,6 @@ const AuthPage = () =>{
                                     className="validate black-text"
                                     onChange={changeHandler}
                                 />
-                                <label htmlFor="password" className="black-text">Password</label>
                             </div>
                         </div>
                     </div>
@@ -73,13 +70,13 @@ const AuthPage = () =>{
 
                     <div className="card-action">
                         <button
-                            className="btn blue-grey darken-2 white-text mr"
+                            className="btn blue waves-orange darken-2 white-text mr"
                             onClick={registerHandler}
                             disabled={loading}
                         >Sign up
                         </button>
                         <button
-                            className="btn grey darken-2 mr"
+                            className="btn  amber lighten-2 black-text mr"
                             disabled={loading}
                             onClick={loginHandler}
                         >
@@ -88,7 +85,6 @@ const AuthPage = () =>{
                     </div>
                 </div>
             </div>
-        </div>
     )
 };
 

@@ -1,32 +1,6 @@
 import React, {useState} from 'react';
-import {useHttp} from "../hooks/http.hook";
 
 const PaypalBtn = (props) => {
-    const [form, setForm] = useState({
-        cmd: '_xclick',
-        business: '2XG2ZGHJR9WSQ',
-        lc: "GB",
-        item_name: props.name,
-        amount: props.price,
-        currency_code: "USD",
-        button_subtype: 'services',
-        bn: "PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"
-    })
-
-    const { request, error, clearError} = useHttp()
-
-    const clickHandler = async event => {
-        if(event.target.name == 'submit') {
-           try {
-               const data = await request ('https://www.paypal.com/cgi-bin/webscr', 'POST')
-           } catch (e) {
-
-           }
-        }
-    }
-
-
-
     return(
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 
@@ -37,9 +11,12 @@ const PaypalBtn = (props) => {
                             <input type="hidden" name="amount" value={props.price}/>
                                 <input type="hidden" name="currency_code" value="USD"/>
                                     <input type="hidden" name="button_subtype" value="services"/>
+                                    <input type="hidden" name="return" value="Страница возврата"/>
+                                    <input type="hidden" name="notify_url" value="Страница для уведомлений"/>
+                                    <input type="hidden" name="cancel_return" value="Страница, если пользователь аннулировал заказ"/>
                                         <input type="hidden" name="bn"
                                                value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"/>
-                                            <input onClick={clickHandler} type="image"
+                                            <input type="image"
                                                    src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_buynowCC_LG.gif"
                                                    border="0" name="submit"
                                                    alt="PayPal – The safer, easier way to pay online!"/>

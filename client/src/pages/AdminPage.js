@@ -24,7 +24,7 @@ const AdminPage = () =>{
         } catch (e) {
             message(e.message)
         }
-    },[token, request])
+    },[token, request, message])
 
     useEffect( () => {
         fetchCards()

@@ -26,7 +26,7 @@ const AdminNewItem = () => {
 
     setTimeout(() => {
         const chips = document.querySelectorAll('.chips');
-        const Chips = M.Chips.init(chips);
+        M.Chips.init(chips);
 
         const dropArea = document.getElementById('dropArea');
 

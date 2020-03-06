@@ -28,8 +28,6 @@ router.post(
 
             const { email, password } = req.body
 
-            const isAdmin = false
-
             const candidate = await User.findOne({ email })
 
             if(candidate) {
@@ -38,11 +36,11 @@ router.post(
 
             const hashedPassword = await bcrypt.hash(password, 12);
 
-            const user = new User({ email, password: hashedPassword, isAdmin})
+            const user = new User({ email, password: hashedPassword})
 
             await user.save()
 
-            res.status(201).json({ message: 'Пользователь создан'})
+            res.status(201).json({ message: 'User created'})
 
         } catch (e) {
             res.status(500).json({ message: 'Что-то у вас пошло нет так, попробуйте снова'})
@@ -87,8 +85,10 @@ router.post(
                 config.get('jwtSecret'),
                 { expiresIn: '1h' }
             )
-
-            res.json({token , userId: user.id, isAdmin: user.isAdmin});
+                // if(user.isAdmin){
+                //     return res.json({token , userId: user.id, isAdmin: user.isAdmin});
+                // }
+            res.json({token , userId: user.id});
 
 
         } catch (e) {

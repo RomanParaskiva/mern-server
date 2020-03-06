@@ -28,12 +28,12 @@ export const useRoutes = (isAdmin,isAuthenticated) => {
         } else {
             return (
                 <Switch>
-                    {/*<Route path="/" exact>*/}
-                    {/*    <MainPage/>*/}
-                    {/*</Route>*/}
-                    {/*<Route path="/detail/:id">*/}
-                    {/*    <DetailPage/>*/}
-                    {/*</Route>*/}
+                    <Route path="/" exact>
+                        <MainPage/>
+                    </Route>
+                    <Route path="/detail/:id">
+                        <DetailPage/>
+                    </Route>
                     <Route path="/user">
                         <UserPage/>
                     </Route>

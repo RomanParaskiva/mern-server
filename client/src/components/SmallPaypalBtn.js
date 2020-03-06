@@ -2,30 +2,6 @@ import React, {useState} from 'react';
 import {useHttp} from "../hooks/http.hook";
 
 const SmallPaypalBtn = (props) => {
-    const [form, setForm] = useState({
-        cmd: '_xclick',
-        business: '2XG2ZGHJR9WSQ',
-        lc: "GB",
-        item_name: props.name,
-        amount: props.price,
-        currency_code: "USD",
-        button_subtype: 'services',
-        bn: "PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted"
-    })
-
-    const { request, error, clearError} = useHttp()
-
-    const clickHandler = async event => {
-        if(event.target.name == 'submit') {
-            try {
-                const data = await request ('https://www.paypal.com/cgi-bin/webscr', 'POST')
-            } catch (e) {
-
-            }
-        }
-    }
-
-
 
     return(
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
