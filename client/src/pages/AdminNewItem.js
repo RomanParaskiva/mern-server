@@ -66,7 +66,6 @@ const AdminNewItem = () => {
 
     function handleFiles(files) {
         files = [...files];
-        console.log(files);
         files.forEach(uploadFile);
         files.forEach(previewFile)
     }

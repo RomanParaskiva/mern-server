@@ -85,10 +85,12 @@ router.post(
                 config.get('jwtSecret'),
                 { expiresIn: '1h' }
             )
-                // if(user.isAdmin){
-                //     return res.json({token , userId: user.id, isAdmin: user.isAdmin});
-                // }
-            res.json({token , userId: user.id});
+                if(user.isAdmin){
+                    return res.json({token , userId: user.id, isAdmin: user.isAdmin});
+                } else {
+                    res.json({token , userId: user.id});
+                }
+
 
 
         } catch (e) {

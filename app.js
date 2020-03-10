@@ -7,6 +7,8 @@ const cors = require('cors');
 
 const app = express();
 
+app.use(express.static(__dirname + './client/'));
+
 app.use(express.json({ extended: true} ));
 
 app.use('/api/auth', require('./routes/auth.routes.js'));
@@ -19,7 +21,7 @@ app.use('/api/user', require('./routes/user.routes.js'));
 
 app.use(cors());
 app.use(fileUpload());
-app.use('./client/public', express.static(__dirname + './client/public'));
+
 
 
 const PORT = config.get('port') || 5000;

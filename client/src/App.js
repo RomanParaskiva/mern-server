@@ -18,6 +18,8 @@ setTimeout(() => {
     M.Materialbox.init(elems);
     const navbar = document.querySelector('.sidenav');
     M.Sidenav.init(navbar);
+    var carousel = document.querySelectorAll('.carousel');
+    M.Carousel.init(carousel);
 
 
 
@@ -39,11 +41,9 @@ function App() {
       }}>
           <Router>
               {navbar}
-                  <div className="">
                       <div className="App">
                           {routes}
                       </div>
-                  </div>
           </Router>
       </AuthContext.Provider>
   );

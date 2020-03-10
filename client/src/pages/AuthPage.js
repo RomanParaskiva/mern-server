@@ -38,9 +38,9 @@ const AuthPage = () =>{
         } catch (e) { }
     }
     return  (
-            <div className="auth_container grey darken-3">
-                <div className="card blue darken-4">
-                    <div className="card-content white-text">
+            <div className="auth_container black-text">
+                <div className="card">
+                    <div className="card-content">
                         <h2 className="card-title center-align">Sign up / Sign in</h2>
                         <div className="mt">
                             <div className="input-field">

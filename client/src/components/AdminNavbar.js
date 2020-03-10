@@ -28,6 +28,7 @@ export const AdminNavbar = () => {
                         className="material-icons">menu</i></a>
                     <a href="/adminka" className="brand-logo">Админка</a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
+                        <li><NavLink to="/adminka/carousel">Слайдер</NavLink></li>
                         <li><NavLink to="/adminka/new">Новый товар</NavLink></li>
                         <li><a href="/" onClick={logoutHandler}>Выход</a></li>
                     </ul>

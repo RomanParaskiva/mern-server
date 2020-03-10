@@ -7,6 +7,7 @@ import DetailPage from './pages/DetailPage';
 import MainPage from './pages/MainPage';
 import UserPage from './pages/UserPage';
 import AdminNewItem from "./pages/AdminNewItem";
+import AdminCarousel from "./components/AdminCarousel";
 
 export const useRoutes = (isAdmin,isAuthenticated) => {
     if (isAuthenticated) {
@@ -21,6 +22,9 @@ export const useRoutes = (isAdmin,isAuthenticated) => {
                     </Route>
                     <Route path="/adminka/detail/:id">
                         <AdminDetailPage />
+                    </Route>
+                    <Route path="/adminka/carousel">
+                        <AdminCarousel/>
                     </Route>
                     <Redirect to="/adminka"/>
                 </Switch>

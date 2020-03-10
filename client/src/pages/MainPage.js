@@ -8,10 +8,10 @@ import FirstScreen from "../components/FirstScreen";
 
 
 const MainPage = () =>{
-    const {token} = useContext(AuthContext)
-    const {loading, request} = useHttp()
-    const message = useMessage()
-    const [cards, setCards] = useState([])
+    const {token} = useContext(AuthContext);
+    const {loading, request} = useHttp();
+    const message = useMessage();
+    const [cards, setCards] = useState([]);
 
     const fetchCards = useCallback(async () => {
         try {
@@ -22,11 +22,16 @@ const MainPage = () =>{
         } catch (e) {
             message(e.message)
         }
-    },[request, message, token])
+    },[request, message, token]);
 
     useEffect( () => {
         fetchCards()
-    }, [fetchCards])
+    }, [fetchCards]);
+
+    const arr = [];
+    const tags = cards.map(card => card.tags.map(tag => arr.includes(tag) ? '' : arr.push(tag)))
+
+    console.log(arr);
 
     if(loading) {
         return <Loader/>
@@ -37,6 +42,6 @@ const MainPage = () =>{
             { !loading && cards && <CardsList cards={cards}/> }
         </div>
     )
-}
+};
 
 export default MainPage;

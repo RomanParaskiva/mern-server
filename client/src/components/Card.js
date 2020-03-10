@@ -11,13 +11,15 @@ const Card = (card) => {
 
     return (
             <div className="col l3 m6 s12">
+
+                <div className="card hoverable">
                 <a href={'/detail/' + item._id}
 
                    className="card_link" >
-                <div className="card hoverable">
                     <div className="card-image waves-effect waves-block waves-light">
                         <Image src={imageSrc}/>
                     </div>
+                </a>
                     <div className="card-content">
                                 <span className="card-title activator grey-text text-darken-4">
                                     {item.title}
@@ -35,7 +37,7 @@ const Card = (card) => {
                         </div>
                     </div>
                 </div>
-                </a>
+
             </div>
 
         )

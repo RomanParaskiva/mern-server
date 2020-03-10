@@ -22,13 +22,15 @@ export const UserNavbar = () => {
     const paypalBtn = () => {
         window.open('https://www.paypal.com/webapps/mpp/paypal-popup','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700')
     }
+
+    const logoSrc = './images/logo.png'
     return(
         <>
-            <nav className="cyan">
+            <nav className="nav_gradient">
                 <div className="nav-wrapper">
                     <a href="#" data-target="slide-out" className="sidenav-trigger"><i
                         className="material-icons">menu</i></a>
-                    <a href="/" className="brand-logo">SVG Shop</a>
+                    <a href="/" className="brand-logo"><img width="250px" src={require(`${logoSrc}`)}/></a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li><a className="paypal_link" href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works"
                                onClick={paypalBtn}><img

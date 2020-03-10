@@ -1,5 +1,9 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
+html{
+    overflow-x: hidden;
+}
+
 .mr{
     margin-right: 1rem;
 }
@@ -32,8 +36,28 @@
     width: content-box;
 }
 
+nav {
+    position: fixed;
+    z-index: 50;
+}
+
 nav .nav-wrapper {
     padding: 0 2em;
+}
+
+nav .nav-wrapper .brand-logo{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: max-content;
+    height: 100%;
+}
+
+.nav_gradient {
+    background: #70e1f5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #ffd194, #70e1f5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #ffd194, #70e1f5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 
@@ -176,7 +200,7 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 2rem;
+    padding-top: 5rem;
 }
 .action_btn_wrapper {
     display: flex;
@@ -234,11 +258,9 @@ input:-internal-autofill-selected
     color: #2c2c2c;
     height: auto;
     line-height: normal;
-    border: none;
-    border-color: hsla(0,0%,100%,.5);
-    background-color: hsla(0,0%,100%,.1);
+    border: 1px solid grey;
+    background-color: transparent;
     box-shadow: none;
-    width: 200px;
 }
 
 .auth_container{
@@ -253,10 +275,12 @@ input:-internal-autofill-selected
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    width: 50vw;
 }
 
 .auth_container .card .card-content{
     padding: 15px;
+    width: 80%;
 }
 
 .first_screen {
@@ -264,12 +288,23 @@ input:-internal-autofill-selected
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    position: relative;
     width: 100vw;
     height: 100vh;
 }
+
 .card_link{
     text-decoration: none;
     color: initial;
+}
+
+.carousel_form_wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    padding-top: 80px;
 }
 
 
@@ -313,5 +348,8 @@ footer {
     }
     footer img{
         width: 60vw;
+    }
+    .auth_container .card {
+        width: 90vw;
     }
 }
