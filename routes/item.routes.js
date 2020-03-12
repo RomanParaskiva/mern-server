@@ -84,8 +84,6 @@ router.post(
         try {
            const {src, title} = req.body;
 
-           console.log(req.body)
-
            if (src && title) {
                const slide = new CI({title, src});
 
@@ -152,7 +150,6 @@ router.get(
     async (req, res) => {
         try {
             const allCard = await Item.find()
-            const carouselImages = await CI.find()
             return res.status(200).json(allCard)
         } catch (e) {
             res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
@@ -183,5 +180,16 @@ router.get(
         }
     }
 )
+
+router.post('/deleteSlide',
+    async (req,res) => {
+    console.log(req)
+        try {
+            const data = await CI.findByIdAndDelete({_id: req.body.id})
+            return res.json(data)
+        } catch (e) {
+            res.status(500).json({ error: e.message, message: 'Что-то у вас пошло нет так, попробуйте снова'})
+        }
+    })
 
 module.exports = router;

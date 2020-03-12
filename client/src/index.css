@@ -28,6 +28,10 @@ html{
     padding-top: 100px;
 }
 
+.pt-80{
+    padding-top: 80px;
+}
+
 .block{
     display: block;
 }
@@ -146,9 +150,7 @@ p {
     margin-top: 10px;
 }
 #gallery img {
-    width: 100%;
-    margin-bottom: 10px;
-    margin-right: 10px;
+    margin: 10px;
     vertical-align: middle;
 }
 .button {
@@ -290,7 +292,6 @@ input:-internal-autofill-selected
     flex-direction: column;
     position: relative;
     width: 100vw;
-    height: 100vh;
 }
 
 .card_link{
@@ -304,8 +305,92 @@ input:-internal-autofill-selected
     justify-content: center;
     align-items: center;
     height: 20vh;
-    padding-top: 80px;
 }
+
+.slideWrapper{
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel .slide .slideWrapper img {
+    max-height: 400px;
+    height: auto;
+    width: auto;
+}
+
+.carousel .slide {
+    background: transparent!important;
+}
+
+.carousel .control-dots .dot.selected, .carousel .control-dots .dot{
+    width: 20px;
+}
+.carousel .control-dots .dot.selected, .carousel .control-dots .dot:hover{
+    width: 20px;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel_loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px;
+    width: 90vw;
+    height: 400px;
+    background-color: lightgrey;
+    border-radius: 10px;
+}
+
+.loader_image{
+    width: 400px;
+    height: 200px;
+    background-color: grey;
+    border-radius: 10px;
+}
+
+.carousel_loader{
+    -webkit-animation: shine 3s linear infinite normal;
+    animation: shine 3s linear infinite normal;
+}
+
+@keyframes shine{
+    0% {
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+    }
+    50%{
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+    }
+    100%{
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+    }
+}
+@-webkit-keyframes shine {
+    0% {
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+    }
+    50%{
+        -webkit-filter: blur(5px);
+        filter: blur(5px);
+    }
+    100%{
+        -webkit-filter: blur(0px);
+        filter: blur(0px);
+    }
+}
+
+
 
 
 footer {

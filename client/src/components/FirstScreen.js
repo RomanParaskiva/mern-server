@@ -1,7 +1,8 @@
 import React, {useCallback, useContext, useEffect, useState} from 'react'
 import {useHttp} from "../hooks/http.hook";
 import {AuthContext} from "../context/AuthContext";
-import Carousel from "./Carousel";
+import Slider from "./Slider";
+import CarouselLoader from './CarouselLoader'
 
 const FirstScreen = () =>{
     const {token} = useContext(AuthContext);
@@ -21,9 +22,15 @@ const FirstScreen = () =>{
         fetchImages()
     }, [fetchImages])
 
+    if(loading) {
+        return (
+            <CarouselLoader/>
+        )
+    }
+
     return(
         <div className="section first_screen">
-            {!loading && images.length > 0 && <Carousel images={images}/>}
+            {!loading && images.length > 0 && <Slider images={images}/>}
         </div>
     )
 }

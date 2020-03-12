@@ -9,7 +9,7 @@ const app = express();
 
 app.use(express.static(__dirname + './client/'));
 
-app.use(express.json({ extended: true} ));
+app.use(express.json({ extended: true, limit: '50mb'} ));
 
 app.use('/api/auth', require('./routes/auth.routes.js'));
 
