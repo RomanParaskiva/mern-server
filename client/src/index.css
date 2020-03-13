@@ -361,6 +361,32 @@ input:-internal-autofill-selected
     animation: shine 3s linear infinite normal;
 }
 
+.search_input {
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.search_input i{
+    padding: 0.5rem;
+}
+
+.search_input label{
+    width: 100%;
+    padding: 0.5rem;
+}
+
+.chips_filter_blc {
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: 1px solid lightgrey;
+    display: flex;
+    flex-wrap: wrap;
+}
+
 @keyframes shine{
     0% {
         -webkit-filter: blur(0px);

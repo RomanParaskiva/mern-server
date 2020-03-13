@@ -5,6 +5,8 @@ import {useMessage} from "../hooks/message.hook";
 import {AuthContext} from "../context/AuthContext";
 import Loader from "../components/Loader";
 import FirstScreen from "../components/FirstScreen";
+import Search from "../components/Search";
+import * as M from "materialize-css";
 
 
 const MainPage = () =>{
@@ -12,6 +14,7 @@ const MainPage = () =>{
     const {loading, request} = useHttp();
     const message = useMessage();
     const [cards, setCards] = useState([]);
+    const [filterResult, setFilterResult] = useState([])
 
     const fetchCards = useCallback(async () => {
         try {
@@ -28,10 +31,22 @@ const MainPage = () =>{
         fetchCards()
     }, [fetchCards]);
 
-    const arr = [];
-    const tags = cards.map(card => card.tags.map(tag => arr.includes(tag) ? '' : arr.push(tag)))
+    const filterHandler = event => {
+        const query = event.target.value
+        setFilterResult(filterByTag(cards, query))
+    }
 
-    console.log(arr);
+    const filterByTag = (cards, value)=> {
+        return cards.filter(card => card.tags.includes(value))
+    }
+
+    const tagsArr = [],
+        tags = cards.map(card => card.tags.map(tag => tagsArr.includes(tag) ? '' : tagsArr.push(tag)));
+
+    const tagsBtn = tagsArr.map(tag => <button onClick={filterHandler} value={tag} className="btn-flat">{tag}</button>)
+
+    tagsBtn.push(<button onClick={() => setFilterResult([])} className="btn">All</button>)
+
 
     if(loading) {
         return <Loader/>
@@ -39,7 +54,10 @@ const MainPage = () =>{
     return  (
         <div className="row">
             <FirstScreen/>
-            { !loading && cards && <CardsList cards={cards}/> }
+            <div className="chips_filter_blc container">
+                {tagsBtn}
+            </div>
+            { !loading && cards && <CardsList cards={filterResult.length > 0 ? filterResult : cards} /> }
         </div>
     )
 };
