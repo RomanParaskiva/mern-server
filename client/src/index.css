@@ -78,6 +78,9 @@ nav .nav-wrapper .brand-logo{
 .icon_blc i:hover{
     color: #00bcd4;
 }
+.icon_blc i.active{
+    color: #00bcd4;
+}
 .price {
     margin-bottom: 0;
     font-size: 2vw;
@@ -226,7 +229,7 @@ p {
     display: flex;
 }
 
-.devider_padding{
+.divider_padding{
     padding: 0 2px;
 }
 
@@ -235,7 +238,8 @@ p {
 }
 
 .paypal_link img{
-    padding-top: 8px;
+    padding-top: 1rem;
+    width: 100%;
 }
 
 input[type=email]:not(.browser-default),

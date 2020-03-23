@@ -11,9 +11,7 @@ const FirstScreen = () =>{
 
     const fetchImages = useCallback(async () => {
         try {
-            const data = await request('/api/item/carousel', 'GET', null, {
-                Authorization: `Bearer ${token}`
-            })
+            const data = await request('/api/item/carousel', 'GET', null, {})
             setImages(data)
         } catch (e) { }
     },[request,token])

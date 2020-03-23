@@ -13,6 +13,7 @@ const DetailPage = () =>{
     const id = useParams().id
     const {token} = useAuth()
 
+
     const getCard = useCallback(async () => {
         try {
             const data = await request(`/api/item/${id}`, 'GET', null, {

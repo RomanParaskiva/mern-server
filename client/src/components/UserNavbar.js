@@ -49,8 +49,7 @@ export const UserNavbar = () => {
                 {logBtn}
                 <li><a className="paypal_link" href="https://www.paypal.com/webapps/mpp/paypal-popup" title="How PayPal Works"
                        onClick={paypalBtn}><img
-                    src="https://www.paypalobjects.com/digitalassets/c/website/marketing/na/us/logo-center/15_nowaccepting_blue_badge.jpg"
-                    border="0" alt="Secured by PayPal"/></a></li>
+                    src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" border="0" alt="PayPal Acceptance Mark"/></a></li>
             </ul>
         </>
     )

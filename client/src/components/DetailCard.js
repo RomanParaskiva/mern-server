@@ -31,12 +31,15 @@ const DetailCard = ({ card }) => {
                 </div>
                 <div className="divider"/>
                 <div className="desc_block">
-                    <div className="w-50 left-align">{card.description}</div>
                     <div className="w-50 left-align">
-                        <span className="grey-text">Delivery</span>
+                        <h5>Description</h5>
+                        {card.description}
+                    </div>
+                    <div className="w-50 left-align">
                         <h5>Instant Download</h5>
                         <span className="darkgrey-text">Your files will be available to download once payment is confirmed.</span>
-                        <h6>I don't accept returns, exchanges, or cancellations. But please contact me if you have any problems with your order.</h6></div>
+                        <p>I don't accept returns, exchanges, or cancellations. But please contact me if you have any problems with your order.</p>
+                    </div>
                 </div>
 
                 <div className="divider"/>
@@ -51,14 +54,14 @@ const DetailCard = ({ card }) => {
                     </div>
                     <IconBlc likes={card.likes}/>
                 </div>
-                <div className="divider devider_padding"/>
+                <div className="divider divider_padding"/>
                 <div className="col 12 action_btn_wrapper">
                     {payment}
+                    <img src="https://www.paypalobjects.com/webstatic/en_SG/mktg/Logos/AM_mc_vs_dc_ae.jpg" alt="PayPal acceptance mark" scale="0"/>
                 </div>
-            </div>
+                <div className="">
 
-            <div className="section">
-                <img src="https://www.paypalobjects.com/webstatic/en_SG/mktg/Logos/AM_mc_vs_dc_ae.jpg" alt="PayPal acceptance mark" scale="0"/>
+                </div>
             </div>
         </div>
     )

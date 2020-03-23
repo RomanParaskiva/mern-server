@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import Image from './Image';
 import SmallPaypalBtn from "./SmallPaypalBtn";
 import {AuthContext} from "../context/AuthContext";
+import IconBlc from "./IconBlc";
 
 const Card = (card) => {
     const {token} = useContext(AuthContext)
@@ -33,7 +34,7 @@ const Card = (card) => {
                             <div className="mb">
                                 {payments}
                             </div>
-                            <span className="likes_wrapper"><i className="material-icons">favorite_border</i><span>{item.likes}</span></span>
+                            <IconBlc id={item._id} likes={item.likes} />
                         </div>
                     </div>
                 </div>
