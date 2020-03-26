@@ -9,9 +9,7 @@ export const CardsList = ({cards}) => {
     }
     return (
         <div className="section" id="cardlist">
-
-            <h2 className="center-align">LATEST BUNDLES</h2>
-            {cards.map(card => <Card key={card._id} card={card}/>)}
+            {cards.map(card => <Card key={card._id} {...card}/>)}
         </div>
     )
 }

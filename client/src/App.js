@@ -29,14 +29,14 @@ setTimeout(() => {
 }, 10);
 
 function App() {
-    const { login, logout, userId, token, isAdmin, ready} = useAuth();
+    const [likeCards, setLikeCards] = useState([]);
+    const [cards, setCards] = useState([]);
+    const { login, logout, userId, token, isAdmin, ready, userLikes} = useAuth();
     const  isAuthenticated = !!token;
     const navbar = isAdmin ? <AdminNavbar/> : <UserNavbar/>;
     const routes = useRoutes(isAdmin, isAuthenticated);
     const {loading, request} = useHttp();
     const message = useMessage();
-    const [cards, setCards] = useState([]);
-
 
     const fetchCards = useCallback(async () => {
         try {
@@ -50,24 +50,21 @@ function App() {
     },[request, message, token]);
 
     useEffect( () => {
-        fetchCards()
-    }, [fetchCards]);
+            fetchCards()
+    }, [ready]);
+
+    useEffect(() => {
+        setLikeCards(userLikes)
+    })
 
 
-
-
-
-
-  if (!ready) {
+  if (!ready || loading) {
       return <Loader/>
   }
 
-    if(loading) {
-        return <Loader/>
-    }
   return (
       <AuthContext.Provider value={{
-        login, logout, token, userId, isAuthenticated, isAdmin
+        login, logout, token, userId, isAuthenticated, isAdmin, likeCards
       }}>
           <CardContext.Provider value={{
               cards: cards

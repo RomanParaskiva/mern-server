@@ -33,6 +33,7 @@ const MainPage = () =>{
             <div className="chips_filter_blc container">
                 {tagsBtn}
             </div>
+            <h2 className="center-align">LATEST BUNDLES</h2>
             { cards && <CardsList cards={filterResult.length > 0 ? filterResult : cards} /> }
         </div>
 

@@ -12,7 +12,7 @@ const DetailCard = ({ card }) => {
         M.Chips.init(chips);
         },10)
 
-    const {token} = useContext(AuthContext)
+    const {token, likeCards} = useContext(AuthContext)
     const chips = card.tags.map(chip => <div className="chip" key={chip}>{chip}</div> );
     const imageSrc = card.imgs.length < 1 ? `./images/nope.jpg` : card.imgs[0]
 
@@ -52,7 +52,6 @@ const DetailCard = ({ card }) => {
                         <i className="small material-icons mr">cloud_download</i>
                         <p>Digital download (1 ZIP)</p>
                     </div>
-                    <IconBlc likes={card.likes}/>
                 </div>
                 <div className="divider divider_padding"/>
                 <div className="col 12 action_btn_wrapper">

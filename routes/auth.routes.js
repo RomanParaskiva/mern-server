@@ -83,15 +83,13 @@ router.post(
             const token = jwt.sign(
                 { userId: user.id},
                 config.get('jwtSecret'),
-                { expiresIn: '1h' }
+                { expiresIn: '24h' }
             )
                 if(user.isAdmin){
                     return res.json({token , userId: user.id, isAdmin: user.isAdmin});
                 } else {
-                    res.json({token , userId: user.id});
+                    res.json({token , userId: user._id, likes: user.likes});
                 }
-
-
 
         } catch (e) {
             res.status(500).json({ message: 'Что-то у вас пошло нет так, попробуйте снова'})

@@ -18,7 +18,6 @@ const UserPage = () =>{
             })
             if(data){
                 setUser(data)
-                console.log(data)
             }
 
         } catch (e) {}
