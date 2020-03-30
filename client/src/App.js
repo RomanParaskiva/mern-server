@@ -71,7 +71,7 @@ function App() {
           }}>
           <Router>
               {navbar}
-                      <div className="App pt-80">
+                      <div className="App pt-60">
                           {routes}
                       </div>
           </Router>

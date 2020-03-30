@@ -1,5 +1,30 @@
 @import "~materialize-css/dist/css/materialize.min.css";
 
+.border {
+    border: 1px solid black;
+}
+.w-100{
+    width: 100%;
+}
+
+.border-radius {
+    border-radius: 15px;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
 html{
     overflow-x: hidden;
 }
@@ -28,8 +53,8 @@ html{
     padding-top: 100px;
 }
 
-.pt-80{
-    padding-top: 80px;
+.pt-60{
+    padding-top: 60px;
 }
 
 .block{
@@ -92,8 +117,6 @@ nav .nav-wrapper .brand-logo{
     display: flex;
     /*flex-wrap: wrap;*/
     flex-direction: row;
-    margin-top: 20px;
-    border: 1px solid darkgrey;
     padding: 2em;
 }
 .cardBox .slider .carousel-row>div{
@@ -122,12 +145,6 @@ nav .nav-wrapper .brand-logo{
     justify-content: center;
     margin-top: 2em;
 }
-
-#preview {
-
-}
-
-
 
 .uploadImg {
     height: 250px;
@@ -335,13 +352,6 @@ input:-internal-autofill-selected
     width: 20px;
 }
 
-.flex {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-
 .carousel_loader {
     display: flex;
     justify-content: center;
@@ -389,6 +399,51 @@ input:-internal-autofill-selected
     border: 1px solid lightgrey;
     display: flex;
     flex-wrap: wrap;
+}
+
+.welkome_blc {
+    position: relative;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    text-align: center;
+    letter-spacing: 1px;
+    height: 5rem;
+    line-height: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to right, #ffd194, #70e1f5);
+}
+
+.welkome_blc img {
+    position: absolute;
+    left: 50px;
+    top:20px;
+    width: 100px;
+    height: 100px;
+}
+.user_blc_wrapper {
+    min-height: 80vh;
+    width: 100%;
+}
+
+.personal_info {
+    margin: 1em 1em 0 1em; 
+    box-shadow: 1px 5px 11px 1px grey;
+}
+
+.info_title{
+    font-weight: 500;
+    text-transform: uppercase;
+    padding: 1em 2em;
+    color: gray; 
+}
+
+.welkome_blc .info_title {
+    margin: 0;
+    font-size: 20px;
+    color: darkslategrey;
 }
 
 @keyframes shine{

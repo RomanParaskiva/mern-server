@@ -30,10 +30,13 @@ const MainPage = () =>{
 
         <div className="row">
             <FirstScreen/>
+            
+            <div className="welkome_blc black-text mt mb">
+                <p className="info_title">LATEST BUNDLES</p>
+            </div>
             <div className="chips_filter_blc container">
                 {tagsBtn}
             </div>
-            <h2 className="center-align">LATEST BUNDLES</h2>
             { cards && <CardsList cards={filterResult.length > 0 ? filterResult : cards} /> }
         </div>
 

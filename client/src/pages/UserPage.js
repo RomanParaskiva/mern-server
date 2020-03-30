@@ -33,10 +33,11 @@ const UserPage = () =>{
 
 
     return  (
-        <div className="container mt">
+        
+        <div className="container mt z-depth-4">
         {!loading && user && <UserInfo user={user}/>}
         </div>
-    )
+        )
 }
 
 export default UserPage;
